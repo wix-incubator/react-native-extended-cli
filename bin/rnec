@@ -1,4 +1,21 @@
 #!/bin/bash
 script=$1
+scriptPath=${BASH_SOURCE[0]%/*}/../scripts/$script.sh
 shift
-sh ../scripts/$script.sh $@
+
+PATH=./node_modules/.bin:$PATH
+export PATH
+
+if [ -z "$script" ]; then
+    echo 'No command specified.'
+    exit
+fi
+
+if [ -f $scriptPath ]; then
+    sh ${BASH_SOURCE[0]%/*}/../scripts/$script.sh $@
+else 
+    react-native $script $@
+fi 
+
+
+
