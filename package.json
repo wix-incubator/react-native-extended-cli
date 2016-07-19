@@ -6,7 +6,8 @@
   "scripts": {
     "test": ":",
     "build": ":",
-    "release": "wnpm-release -- --no-shrinkwrap"
+    "release": "wnpm-release -- --no-shrinkwrap",
+    "postrelease": "echo \"##teamcity[buildStatus text='Version: `npm show ${npm_package_name} version`; {build.status.text}']\""
   },
   "repository": {
     "type": "git",
