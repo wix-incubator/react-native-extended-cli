@@ -2,7 +2,7 @@
   "name": "react-native-extended-cli",
   "version": "1.0.1",
   "description": "Extended CLI with convenient scripts and utilities for developing React Native apps",
-  "main": "index.js",
+  "main": "bin/rnx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

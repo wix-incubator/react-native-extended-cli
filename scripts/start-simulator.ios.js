@@ -7,7 +7,7 @@ if (!iphoneModel) {
   iphoneModel = process.argv[2];
 }
 if (!iphoneModel) {
-  throw new Error(`can't find iphoneModel in npm package config OR supplied as an argument`);
+  throw new Error(`Can't find iphoneModel in npm package config OR supplied as an argument`);
 }
 
 const all = JSON.parse(cp.execSync(`xcrun simctl list -j devices`)).devices;

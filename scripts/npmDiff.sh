@@ -4,8 +4,7 @@ echo "##teamcity[blockOpened name='npm-diff']"
 TMP=${TMPDIR}_artifacts
 
 # get npm-list.txt from the latest successful build
-function get_last_successful_npm_list() {
-  buildName=inbox-mobile
+function get_last_successful_npm_list() {  
   snapshotUrl=http://repo.dev.wix/artifactory/libs-snapshots/com/wixpress/crm/$buildName/1.0.0-SNAPSHOT
   build=`curl -s $snapshotUrl/maven-metadata.xml | grep '<value>' | head -1 | sed "s/.*<value>\([^<]*\)<\/value>.*/\1/"`
   rm -rf $TMP
