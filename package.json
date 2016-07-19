@@ -4,7 +4,9 @@
   "description": "Extended CLI with convenient scripts and utilities for developing React Native apps",
   "main": "bin/rnx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ":",
+    "build": ":",
+    "release": "wnpm-release -- --no-shrinkwrap"
   },
   "repository": {
     "type": "git",
@@ -16,11 +18,14 @@
     "url": "https://github.com/wix/react-native-extended-cli/issues"
   },
   "homepage": "https://github.com/wix/react-native-extended-cli#readme",
-  "peerDependencies": {
+  "dependencies": {
     "appium": "^1.5.1",
     "colors": "^1.0.3",
     "flow-bin": "^0.23.0",
     "node-notifier": "^4.5.0",
     "watch": "^0.16.0"
+  },
+  "optionalDependencies": {
+    "wnpm-ci": "^6.1.166"
   }
 }
