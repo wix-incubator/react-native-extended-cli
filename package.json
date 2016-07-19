@@ -22,11 +22,11 @@
   "dependencies": {
     "appium": "^1.5.1",
     "colors": "^1.0.3",
-    "flow-bin": "^0.23.0",
     "node-notifier": "^4.5.0",
     "watch": "^0.16.0"
   },
   "optionalDependencies": {
+    "flow-bin": "^0.23.0",
     "wnpm-ci": "^6.1.166"
   }
 }
