@@ -3,17 +3,19 @@ script=$1
 scriptPath=${BASH_SOURCE[0]%/*}/../scripts/$script.sh
 shift
 
-PATH=./node_modules/.bin:$PATH
+PATH=$PATH:./node_modules/.bin
 export PATH
 
 if [ -z "$script" ]; then
-    echo 'No command specified.'
+    echo "======================="
+    echo "Welcome to rnx, the React Native Extended CLI. You didn't specify a command, so I'll exit now."
+    echo "======================="
     exit
 fi
 
 if [ -f $scriptPath ]; then
     sh ${BASH_SOURCE[0]%/*}/../scripts/$script.sh $@
-else 
+else
     react-native $script $@
 fi 
 
