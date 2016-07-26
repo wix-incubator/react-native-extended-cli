@@ -7,7 +7,7 @@
     "test": ":",
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap",
-    "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\""
+    "postrelease": "echo \"##teamcity[buildStatus text='Version: `npm show ${npm_package_name} version`; {build.status.text}']\""
   },
   "repository": {
     "type": "git",
