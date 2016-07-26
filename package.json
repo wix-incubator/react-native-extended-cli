@@ -23,6 +23,7 @@
     "appium": "^1.5.1",
     "colors": "^1.0.3",
     "node-notifier": "^4.5.0",
+    "rninit": "^0.1.1",
     "update-notifier": "^1.0.2",
     "watch": "^0.16.0"
   },
