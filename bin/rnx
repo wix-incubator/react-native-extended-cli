@@ -6,7 +6,7 @@ shift
 PATH=$PATH:./node_modules/.bin
 export PATH
 
-node ./bin/update-notifier.js
+node ${BASH_SOURCE[0]%/*}/update-notifier.js
 
 if [ -z "$script" ]; then
     echo "======================="
