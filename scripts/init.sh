@@ -2,14 +2,12 @@ projectName=$1
 rnVersion=$2
 
 if [ "$rnVersion" == "" ]; then
-    rnVersion="@latest"
+    rnVersion="latest"
 fi
 
 echo Initialling React Native project $projectName with version: $rnVersion
 
 rninit init $projectName --source react-native@$rnVersion
-
-rnxRoot=${BASH_SOURCE[0]%/*}/../
 
 cd $projectName
 

@@ -13,7 +13,7 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   buildMode='Release'
   # output npmDiff. once npm update isn't required, this should be moved to prebuild
   set +e
-  ${BASH_SOURCE[0]%/*}/npmDiff.sh  --buildName=${appName} | head -n 150
+  $rnxRoot/scripts/npmDiff.sh  --buildName=${appName} | head -n 150
   set -e
 else
   buildMode='Debug'

@@ -7,9 +7,11 @@ rnxRoot=${BASH_SOURCE[0]%/*}/../react-native-extended-cli
 if [ ! -d "$rnxRoot" ]; then
     rnxRoot=${BASH_SOURCE[0]%/*}/../lib/node_modules/react-native-extended-cli
 fi
+export rnxRoot
 
 PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
 export PATH
+
 
 node ${rnxRoot}/bin/update-notifier.js
 
