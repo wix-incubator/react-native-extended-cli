@@ -14,6 +14,7 @@ jq -r '.version="1.0.0" \
     | .scripts.build="rnx build" \
     | .scripts.release="rnx release" \
     | .scripts.lint="eslint test src" \
+    | .scripts.test="rnx test" \
     | .config.appName="$projectName" \
     | .config.iphoneModel="iPhone 6s" ' package.json > tmp.json && mv tmp.json package.json
 

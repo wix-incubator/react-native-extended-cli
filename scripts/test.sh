@@ -15,11 +15,11 @@ killProcess appium
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   killProcess inbox-mock-server
-  killProcess fake-server # kill other fake servers in the CI to clear port 3000
-  nohup node ./node_modules/inbox-mock-server/ &
+  #killProcess fake-server # kill other fake servers in the CI to clear port 3000
+  #nohup node ./node_modules/inbox-mock-server/ &
 else
   # disconnect hardware keyboard from simulator
-  osascript scripts/set_hardware_keyboard.applescript 0
+  osascript ${BASH_SOURCE[0]%/*}/set_hardware_keyboard.applescript 0
 fi
 
 echo "##teamcity[blockOpened name='E2E']"
