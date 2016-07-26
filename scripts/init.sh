@@ -18,4 +18,18 @@ jq -r '.version="1.0.0" \
     | .config.appName="$projectName" \
     | .config.iphoneModel="iPhone 6s" ' package.json > tmp.json && mv tmp.json package.json
 
-npm install react-native-extended-cli --save-dev
+npm install react-native-extended-cli enzyme proxyquire react-dom react-native-mock --save-dev
+
+#TODO: Add this to package.json
+# "babel": {
+#     "env": {
+#       "specs": {
+#         "presets": [
+#           "es2015",
+#           "react",
+#           "stage-0"
+#         ],
+#         "retainLines": true
+#       }
+#     }
+#   }
