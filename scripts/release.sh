@@ -1,0 +1,1 @@
+wnpm-release -- --no-shrinkwrap

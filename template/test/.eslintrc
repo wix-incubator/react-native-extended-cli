@@ -1,0 +1,15 @@
+{
+  "globals": {
+    "jasmine": false,
+    "describe": false,
+    "it": false,
+    "xit": false,
+    "expect": false,
+    "driver": false,
+    "beforeEach": false,
+    "afterEach": false,
+    "beforeAll": false,
+    "afterAll": false,
+    "spyOn": false
+  }
+}
