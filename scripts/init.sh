@@ -1,11 +1,12 @@
-echo Initialling React Native project $1 with version $2
+projectName=$1
+echo Initialling React Native project $projectName with version: $2
 
-rninit init $1 --source react-native@$2
+rninit init $projectName --source react-native@$2
 
-rnxRoot=${BASH_SOURCE[0]%/*}/../react-native-extended-cli
+rnxRoot=${BASH_SOURCE[0]%/*}/../
 
-if [ ! -d "$rnxRoot" ]; then
-    rnxRoot=${BASH_SOURCE[0]%/*}/../lib/node_modules/react-native-extended-cli
-fi
+cd $projectName
 
-cp -r rnxRoot/template/ ./ 
+cp -r $rnxRoot/template/ ./ 
+
+jq -r '.version="1.0.0" | .main="src/module.js" | .scripts.build="rnx build" | .scripts.release="rnx release"' package.json > tmp.json && mv tmp.json package.json
