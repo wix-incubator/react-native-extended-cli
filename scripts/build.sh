@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
-./scripts/build.ios.sh $1
-./scripts/build.android.sh $1
+${BASH_SOURCE[0]%/*}/build.ios.sh $1
+${BASH_SOURCE[0]%/*}/build.android.sh $1

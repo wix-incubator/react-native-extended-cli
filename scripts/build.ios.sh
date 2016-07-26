@@ -1,13 +1,9 @@
 #!/bin/bash -e
 
-
 model=$npm_package_config_iphoneModel
 appName=$npm_package_config_appName
 scheme=$npm_package_config_appName
 buildPath="./DerivedData/${appName}/Build/Products/${appName}-iphonesimulator/${appName}.app"
-
-# remove this after this PR is accepted https://github.com/pburtchaell/redux-promise-middleware/pull/84
-rm -rf ./node_modules/redux-promise-middleware/node_modules/history/
 
 rm -rf ./artifacts; mkdir ./artifacts/ ; npm ls > ./artifacts/npm-list.txt
 
@@ -17,14 +13,14 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   buildMode='Release'
   # output npmDiff. once npm update isn't required, this should be moved to prebuild
   set +e
-  ./scripts/npmDiff.sh  --buildName=${appName} | head -n 150
+  ${BASH_SOURCE[0]%/*}/npmDiff.sh  --buildName=${appName} | head -n 150
   set -e
 else
   buildMode='Debug'
 fi
 
 if [ ! -f ./test/e2e/mocks/ConfigurationFacadeMock.private.js ]; then
-  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/e2e/mocks/ConfigurationFacadeMock.private.js
+  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/e2e/mocks/configuration-facade-mocks.private.js
 fi
 
 cd ios
@@ -32,7 +28,7 @@ cd ios
 # build app
 echo "##teamcity[blockOpened name='XCode Build']"
 echo Building ${appName} in with scheme: ${scheme}...
-xcodebuild -scheme ${scheme} clean
+#xcodebuild -scheme ${scheme} clean
 xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}"
 echo "##teamcity[blockClosed name='XCode Build']"
 
@@ -44,7 +40,7 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   fi
 fi
 
-node "${PWD}/../scripts/start-simulator.ios.js"
+node "${BASH_SOURCE[0]%/*}/start-simulator.ios.js"
 
 # install app
 CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app/Info.plist")
