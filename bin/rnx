@@ -6,9 +6,12 @@ shift
 PATH=$PATH:./node_modules/.bin
 export PATH
 
+node ./bin/update-notifier.js
+
 if [ -z "$script" ]; then
     echo "======================="
-    echo "Welcome to rnx, the React Native Extended CLI. You didn't specify a command, so I'll exit now."
+    echo "Welcome to rnx, the React Native Extended CLI!" 
+    echo "You didn't specify a command, so I'll exit now."
     echo "======================="
     exit
 fi
