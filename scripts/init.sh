@@ -19,6 +19,7 @@ jq -r '.version="1.0.0"
     | .scripts.release="rnx release"
     | .scripts.lint="eslint test src"
     | .scripts.test="rnx test"
+    | .scripts.fake-server=":"
     | .babel.env.specs.presets=["es2015", "react", "stage-0"]
     | .babel.env.specs.retainLines="true"
     | .config.appName="$projectName"    
