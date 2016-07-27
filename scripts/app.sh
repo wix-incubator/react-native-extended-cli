@@ -1,7 +1,7 @@
 #!/bin/bash
 buildMode="Debug"
 appName=$npm_package_config_appName
-packageName=$1
+packageName=$npm_package_config_packageName
 appPath=./ios/DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app
 
 echo "Starting ${appName} in ${buildMode} mode"

@@ -1,0 +1,1 @@
+open ./ios/$npm_package_config_appName.xcodeproj

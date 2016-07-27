@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
-npm run lint
+$rnxRoot/scripts/lint.sh
 
 if [ $? -ne 0 ]; then
-    echo "Tests failed: build terminating"    
+    echo "Lint failed: build terminating"    
     exit
 fi
 
-$rnxRoot/scripts/test.sh
+$rnxRoot/scripts/test.sh unit
 
 if [ $? -ne 0 ]; then
     echo "Tests failed: build terminating"    
