@@ -40,7 +40,7 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   fi
 fi
 
-node "${BASH_SOURCE[0]%/*}/start-simulator.ios.js"
+node "$rnxRoot/util/start-simulator.ios.js"
 
 # install app
 CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app/Info.plist")
