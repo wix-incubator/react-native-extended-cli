@@ -19,8 +19,8 @@ else
   buildMode='Debug'
 fi
 
-if [ ! -f ./test/e2e/mocks/configuration-facade-mocks.private.js ]; then
-  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/e2e/mocks/configuration-facade-mocks.private.js
+if [ ! -f ./test/e2e/mocks/configuration-facade-mock.private.js ]; then
+  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/e2e/mocks/configuration-facade-mock.private.js
 fi
 
 cd ios
