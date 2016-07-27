@@ -6,5 +6,5 @@ if [ "$1" != "e2e" ]; then
 fi
 
 if [ "$1" != "unit" ]; then
-  $rnxRoot/util/test-e2e.sh  
+  $rnxRoot/util/test-e2e.sh $1 
 fi

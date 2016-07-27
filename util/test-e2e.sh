@@ -17,9 +17,8 @@ exitCode=$?
 set -e
 echo "##teamcity[blockClosed name='E2E']"
 
-if [ "${IS_BUILD_AGENT}" == true ]; then
-  $rnxRoot/util/killProcess.sh inbox-mock-server
-  $rnxRoot/util/killProcess.sh inbox-mobile/node_modules/react-native/packager/launchPackager.command
+if [ "${IS_BUILD_AGENT}" == true ]; then  
+  $rnxRoot/util/killProcess.sh ./node_modules/react-native/packager/launchPackager.command
   $rnxRoot/util/killProcess.sh "appium"
   $rnxRoot/util/killProcess.sh "Simulator"
   $rnxRoot/util/killProcess.sh "instruments -t"
