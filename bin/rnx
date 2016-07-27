@@ -28,5 +28,10 @@ scriptPath=${rnxRoot}/scripts/$script.sh
 if [ -f $scriptPath ]; then
     sh $scriptPath $@
 else
+    echo "======================="
+    echo "Welcome to rnx, the React Native Extended CLI!"
+    echo "You specified a command I don't understand, so I'll pass it over to the standard react-native cli."
+    echo "======================="
+    exit
     react-native $script $@
 fi
