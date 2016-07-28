@@ -5,7 +5,9 @@ appName=$npm_package_config_appName
 scheme=$npm_package_config_appName
 buildPath="./DerivedData/${appName}/Build/Products/${appName}-iphonesimulator/${appName}.app"
 
+set +e
 rm -rf ./artifacts; mkdir ./artifacts/ ; npm ls > ./artifacts/npm-list.txt
+set -e
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   rm -rf ${buildPath}
