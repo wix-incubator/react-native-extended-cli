@@ -4,7 +4,7 @@ echo "##teamcity[blockOpened name='E2E']"
 set +e
 
 #todo deprecate jasmine/appium support eventually
-if [ -d "./test/e2e/support/jasmine-runner.js" ]; then
+if [ -f "./test/e2e/support/jasmine-runner.js" ]; then
   $rnxRoot/util/killProcess.sh appium
 
   if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then  
