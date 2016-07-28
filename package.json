@@ -20,8 +20,9 @@
     "url": "https://github.com/wix/react-native-extended-cli/issues"
   },
   "homepage": "https://github.com/wix/react-native-extended-cli#readme",
-  "dependencies": {    
+  "dependencies": {
     "colors": "^1.0.3",
+    "lodash": "^4.14.0",
     "node-notifier": "^4.5.0",
     "rninit": "^0.1.1",
     "update-notifier": "^1.0.2",
