@@ -6,6 +6,7 @@ echo "##teamcity[blockOpened name='rnx lint']"
 $rnxRoot/scripts/lint.sh
 if [ $? -ne 0 ]; then
     echo "Lint failed: build terminating"
+    echo "#teamcity[buildStatus status='Lint Failure' text='Lint Failure.']"
     exit 3
 fi
 echo "##teamcity[blockClosed name='rnx lint']"
