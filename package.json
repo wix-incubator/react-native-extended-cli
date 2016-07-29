@@ -7,6 +7,8 @@
     "test": ":",
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap",
+    "preinstall": "echo \"##teamcity[blockOpened name='npm install']\"",
+    "postinstall": "echo \"##teamcity[blockClosed name='npm install']\"",
     "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\"",
     "postpublish": "version=$(jq -r '.version' package.json); npm dist-tag add react-native-extended-cli@${version} ga"
   },
