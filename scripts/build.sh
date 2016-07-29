@@ -20,22 +20,26 @@ if [ $? -ne 0 ]; then
 fi
 echo "##teamcity[blockClosed name='rnx test unit']"
 
-echo "##teamcity[blockOpened name='iOS Build']"
-$rnxRoot/util/build.ios.sh $1
-if [ $? -ne 0 ]; then
-    echo "iOS build failed"    
-    echo "##teamcity[buildStatus status='iOS Build Failed' text='iOS Build Failed']"
-    exit 5
+if [[ $* != *--skip-ios* ]]; then
+    echo "##teamcity[blockOpened name='iOS Build']"
+    $rnxRoot/util/build.ios.sh $1
+    if [ $? -ne 0 ]; then
+        echo "iOS build failed"
+        echo "##teamcity[buildStatus status='iOS Build Failed' text='iOS Build Failed']"
+        exit 5
+    fi
+    echo "##teamcity[blockClosed name='iOS Build']"
 fi
-echo "##teamcity[blockClosed name='iOS Build']"
 
-echo "##teamcity[blockOpened name='Android Build']"
-$rnxRoot/util/build.android.sh $1
-if [ $? -ne 0 ]; then
-    echo "Android build failed"    
-    echo "##teamcity[buildStatus status='Android Build Failed' text='Android Build Failed']"
-    exit 6
+if [[ $* != *--skip-android* ]]; then
+    echo "##teamcity[blockOpened name='Android Build']"
+    $rnxRoot/util/build.android.sh $1
+    if [ $? -ne 0 ]; then
+        echo "Android build failed"
+        echo "##teamcity[buildStatus status='Android Build Failed' text='Android Build Failed']"
+        exit 6
+    fi
+    echo "##teamcity[blockClosed name='Android Build']"
 fi
-echo "##teamcity[blockClosed name='Android Build']"
 
 echo "##teamcity[blockClosed name='rnx build']"
