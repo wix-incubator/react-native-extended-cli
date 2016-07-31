@@ -8,8 +8,10 @@ if [ ! -d "$rnxRoot" ]; then
     rnxRoot=${BASH_SOURCE[0]%/*}/../lib/node_modules/react-native-extended-cli
 fi
 export rnxRoot
-
 export PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
+
+
+node ${rnxRoot}/bin/update-notifier.js
 
 configVars="appName iphoneModel packageName"
 for var in $configVars
@@ -22,7 +24,6 @@ do
     fi     
 done
 
-node ${rnxRoot}/bin/update-notifier.js
 
 if [ -z "$script" ]; then
     echo "==================================================="

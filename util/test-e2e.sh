@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "##teamcity[blockOpened name='E2E']"
+$rnxRoot/util/logger.sh blockOpened E2E 
 set +e
 
 #todo deprecate jasmine/appium support eventually
@@ -25,7 +25,7 @@ fi
 
 exitCode=$?
 set -e
-echo "##teamcity[blockClosed name='E2E']"
+$rnxRoot/util/logger.sh blockClosed E2E 
 
 if [ "${IS_BUILD_AGENT}" == true ]; then  
   $rnxRoot/util/killProcess.sh ./node_modules/react-native/packager/launchPackager.command

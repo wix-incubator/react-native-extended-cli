@@ -1,3 +1,4 @@
 echo Linting...
-echo "==============================="
+echo 
 eslint src test
+echo 

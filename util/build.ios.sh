@@ -12,13 +12,13 @@ set -e
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   rm -rf ${buildPath}
   scheme="Release"
-  buildMode='Release'
+  buildMode="Release"
   # output npmDiff. once npm update isn't required, this should be moved to prebuild
   set +e
   $rnxRoot/util/npmDiff.sh  --buildName=${appName} | head -n 150
   set -e
 else
-  buildMode='Debug'
+  buildMode="Debug"
 fi
 
 if [ ! -f ./test/e2e/mocks/configuration-facade-mock.private.js ]; then
@@ -28,11 +28,11 @@ fi
 cd ios
 
 # build app
-echo "##teamcity[blockOpened name='XCode Build']"
+$rnxRoot/util/logger.sh blockOpened "XCode Build"
 echo Building ${appName} in with scheme: ${scheme}...
 #xcodebuild -scheme ${scheme} clean
 xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}"
-echo "##teamcity[blockClosed name='XCode Build']"
+$rnxRoot/util/logger.sh blockClosed "XCode Build"
 
 # make sure that the bundle was created successfully
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
