@@ -19,21 +19,25 @@ if [ $? -ne 0 ]; then
 fi
 $rnxRoot/util/logger.sh blockClosed "rnx test unit"
 
-$rnxRoot/util/logger.sh blockOpened "iOS Build"
-$rnxRoot/util/build.ios.sh $1
-if [ $? -ne 0 ]; then
-    echo "iOS build failed"    
-    $rnxRoot/util/logger.sh buildStatus "iOS Build Failed"
-    exit 5
+if [[ $* != *--skip-ios* ]]; then
+    $rnxRoot/util/logger.sh blockOpened "iOS Build"
+    $rnxRoot/util/build.ios.sh $1
+    if [ $? -ne 0 ]; then
+        echo "iOS build failed"    
+        $rnxRoot/util/logger.sh buildStatus "iOS Build Failed"
+        exit 5
+    fi
+    $rnxRoot/util/logger.sh blockClosed "iOS Build"
 fi
-$rnxRoot/util/logger.sh blockClosed "iOS Build"
 
-$rnxRoot/util/logger.sh blockOpened "Android Build"
-$rnxRoot/util/build.android.sh $1
-if [ $? -ne 0 ]; then
-    echo "Android build failed"    
-    $rnxRoot/util/logger.sh buildStatus "Android Build Failed"
-    exit 6
+if [[ $* != *--skip-android* ]]; then
+    $rnxRoot/util/logger.sh blockOpened "Android Build"
+    $rnxRoot/util/build.android.sh $1
+    if [ $? -ne 0 ]; then
+        echo "Android build failed"    
+        $rnxRoot/util/logger.sh buildStatus "Android Build Failed"
+        exit 6
+    fi
+    $rnxRoot/util/logger.sh blockClosed "Android Build"  
 fi
-$rnxRoot/util/logger.sh blockClosed "Android Build"
 $rnxRoot/util/logger.sh blockClosed "rnx build"
