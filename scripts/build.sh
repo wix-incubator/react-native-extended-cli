@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+if [ ! -f ./test/mocks/configuration-facade-mock.private.js ]; then
+  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/mocks/configuration-facade-mock.private.js
+fi
+
 $rnxRoot/util/logger.sh blockOpened "rnx build"
 $rnxRoot/util/logger.sh blockOpened "rnx lint"
 $rnxRoot/scripts/lint.sh
