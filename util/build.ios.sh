@@ -20,11 +20,6 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
 else
   buildMode="Debug"
 fi
-
-if [ ! -f ./test/e2e/mocks/configuration-facade-mock.private.js ]; then
-  echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/e2e/mocks/configuration-facade-mock.private.js
-fi
-
 cd ios
 
 # build app
