@@ -4,6 +4,7 @@ $rnxRoot/util/logger.sh blockOpened E2E
 set +e
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+  $rnxRoot/util/checkPort.sh 3000
   $rnxRoot/util/killProcess.sh fake-server # kill other fake servers in the CI to clear port 3000
   npm run fake-server &
 else
