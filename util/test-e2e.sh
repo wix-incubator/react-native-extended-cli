@@ -32,6 +32,7 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
   $rnxRoot/util/killProcess.sh "Simulator"
   $rnxRoot/util/killProcess.sh "instruments -t"
   $rnxRoot/util/killProcess.sh "CoreSimulator"
+  $rnxRoot/util/killProcess.sh "fake-server"
 fi
 
 $rnxRoot/util/postTest.sh
