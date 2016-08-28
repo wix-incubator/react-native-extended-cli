@@ -1,11 +1,20 @@
 #!/bin/bash
 set -e
 
+$rnxRoot/util/logger.sh blockOpened "Lint"
+rnx lint $@
+if [ $? -ne 0 ]; then
+    echo "Lint failed"
+    $rnxRoot/util/logger.sh buildStatus "Lint Failed"
+    exit 1
+fi
+$rnxRoot/util/logger.sh blockClosed "Lint"
+
 if [ "$1" != "e2e" ]; then
   $rnxRoot/util/logger.sh blockOpened "Unit Tests"
   $rnxRoot/util/test-unit.sh $@
   if [ $? -ne 0 ]; then
-    echo "Unit Tests failed"    
+    echo "Unit Tests failed"
     $rnxRoot/util/logger.sh buildStatus "Unit Tests Failed"
     exit 1
   fi
