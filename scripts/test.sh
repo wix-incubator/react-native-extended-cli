@@ -10,7 +10,7 @@ if [ $? -ne 0 ]; then
 fi
 $rnxRoot/util/logger.sh blockClosed "Lint"
 
-if [ "$1" != "e2e" ]; then
+if [ "$1" != "--e2e" ]; then
   $rnxRoot/util/logger.sh blockOpened "Unit Tests"
   $rnxRoot/util/test-unit.sh $@
   if [ $? -ne 0 ]; then
@@ -21,7 +21,7 @@ if [ "$1" != "e2e" ]; then
   $rnxRoot/util/logger.sh blockClosed "Unit Tests"
 fi
 
-if [ "$1" != "unit" ]; then
+if [ "$1" != "--unit" ]; then
   $rnxRoot/util/logger.sh blockOpened "E2E Tests"
   $rnxRoot/util/test-e2e.sh $@
   if [ $? -ne 0 ]; then
