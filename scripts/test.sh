@@ -1,14 +1,16 @@
 #!/bin/bash
 set -e
 
-$rnxRoot/util/logger.sh blockOpened "Lint"
-rnx lint $@
-if [ $? -ne 0 ]; then
-    echo "Lint failed"
-    $rnxRoot/util/logger.sh buildStatus "Lint Failed"
-    exit 1
+if [[ $* != *--skip-lint* ]]; then
+  $rnxRoot/util/logger.sh blockOpened "Lint"
+  rnx lint $@
+  if [ $? -ne 0 ]; then
+      echo "Lint failed"
+      $rnxRoot/util/logger.sh buildStatus "Lint Failed"
+      exit 1
+  fi
+  $rnxRoot/util/logger.sh blockClosed "Lint"
 fi
-$rnxRoot/util/logger.sh blockClosed "Lint"
 
 if [ "$1" != "--e2e" ]; then
   $rnxRoot/util/logger.sh blockOpened "Unit Tests"

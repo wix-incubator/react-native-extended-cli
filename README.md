@@ -37,7 +37,7 @@ rnx build <platform>
 rnx lint
 
 #test, optionally just unit or e2e
-rnx test [--unit|--e2e]
+rnx test [--unit|--e2e] [--skip-lint]
 
 #watch - lint and unit tests on all changes
 rnx watch
