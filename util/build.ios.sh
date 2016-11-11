@@ -38,11 +38,12 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   fi
 fi
 
-node "$rnxRoot/util/start-simulator.ios.js"
-
-# install app
-CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app/Info.plist")
-xcrun simctl uninstall booted ${CURRENT_BUNDLE_IDENTIFIER}
-xcrun simctl install booted "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app"
+#TODO detox installs and starts the simulator by its own - this is jasmine/appium specific and should be deprecated eventually
+if [ -f "./test/e2e/support/jasmine-runner.js" ]; then
+  node "$rnxRoot/util/start-simulator.ios.js"
+  CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app/Info.plist")
+  xcrun simctl uninstall booted ${CURRENT_BUNDLE_IDENTIFIER}
+  xcrun simctl install booted "./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app"
+fi
 
 cd ..
