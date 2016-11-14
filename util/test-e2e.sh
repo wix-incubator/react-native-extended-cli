@@ -20,11 +20,11 @@ else
 
   #FIXME temporary disabled detox in CI until we upgrade to a version of detox that supports xcode8
   if [ "${IS_BUILD_AGENT}" == true ]; then
+    echo "WARNING: temporary disabled detox on CI until we upgrade to a version of detox that supports xcode8"
+  else
     $rnxRoot/util/killProcess.sh detox-server
     ./node_modules/.bin/detox-server &
     BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
-  else
-    echo "WARNING: temporary disabled detox on CI until we upgrade to a version of detox that supports xcode8"
   fi
 
 fi
