@@ -18,13 +18,13 @@ if [ -f "./test/e2e/support/jasmine-runner.js" ]; then
   BABEL_ENV=specs specFilterString=./test/e2e/*.e2e.spec.js node ./test/e2e/support/jasmine-runner.js $@
 else
 
-  #FIXME temporary disabled detox on macagent2 until we upgrade to a version of detox that supports xcode8
-  if [ -z `ifconfig |grep 192.168.37.64` ]; then
+  #FIXME temporary disabled detox in CI until we upgrade to a version of detox that supports xcode8
+  if [ "${IS_BUILD_AGENT}" == true ]; then
     $rnxRoot/util/killProcess.sh detox-server
     ./node_modules/.bin/detox-server &
     BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
   else
-    echo "WARNING: temporary disabled detox on macagent2 until we upgrade to a version of detox that supports xcode8"
+    echo "WARNING: temporary disabled detox on CI until we upgrade to a version of detox that supports xcode8"
   fi
 
 fi
