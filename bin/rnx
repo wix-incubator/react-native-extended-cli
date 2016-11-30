@@ -13,16 +13,18 @@ export PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
 
 node ${rnxRoot}/bin/update-notifier.js
 
-configVars="appName iphoneModel packageName"
-for var in $configVars
-do 
-    val=$(jq -r .config.$var package.json)    
-    if [ "$val" == "null" ]; then
-        echo Missing config.$var in package.json. This could cause issues.
-    else         
-        export npm_package_config_$var="$val"
-    fi     
-done
+if [ "$script" != "init" ]; then
+  configVars="appName iphoneModel packageName"
+  for var in $configVars
+  do
+      val=$(jq -r .config.$var package.json)
+      if [ "$val" == "null" ]; then
+          echo Missing config.$var in package.json. This could cause issues.
+      else
+          export npm_package_config_$var="$val"
+      fi
+  done
+fi
 
 
 if [ -z "$script" ]; then
