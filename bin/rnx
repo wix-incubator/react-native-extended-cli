@@ -1,6 +1,5 @@
 #!/bin/bash -e
 script=$1
-shift
 
 rnxRoot=${BASH_SOURCE[0]%/*}/../react-native-extended-cli
 
@@ -44,6 +43,8 @@ fi
 
 scriptPath=${rnxRoot}/scripts/$script.sh
 
+
+shift
 if [ -f $scriptPath ]; then
     sh $scriptPath $@
 else
