@@ -3,6 +3,7 @@
 model=$npm_package_config_iphoneModel
 appName=$npm_package_config_appName
 scheme=$npm_package_config_appName
+releaseScheme=${npm_package_config_releaseScheme:=Release}
 buildPath="./DerivedData/${appName}/Build/Products/${appName}-iphonesimulator/${appName}.app"
 
 set +e
@@ -11,8 +12,8 @@ set -e
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   rm -rf ${buildPath}
-  scheme="Release"
-  buildMode="Release"
+  scheme="${releaseScheme}"
+  buildMode="${releaseScheme}"
   # output npmDiff. once npm update isn't required, this should be moved to prebuild
   set +e
   $rnxRoot/util/npmDiff.sh  --buildName=${appName} | head -n 150
