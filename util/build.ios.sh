@@ -33,7 +33,7 @@ $rnxRoot/util/logger.sh blockClosed "XCode Build"
 
 # make sure that the bundle was created successfully
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
-  if [ ! -f ./DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app/main.jsbundle ]; then
+  if [ ! -f ${buildPath}/main.jsbundle ]; then
     echo "jsbundle was not created!" > /dev/stderr
     exit 4
   fi
