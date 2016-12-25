@@ -25,7 +25,7 @@ cd ios
 $rnxRoot/util/logger.sh blockOpened "XCode Build"
 echo Building ${appName} in with scheme: ${scheme}...
 #xcodebuild -scheme ${scheme} clean
-xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}"
+xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}" -derivedDataPath "./DerivedData/${appName}"
 $rnxRoot/util/logger.sh blockClosed "XCode Build"
 
 # make sure that the bundle was created successfully
