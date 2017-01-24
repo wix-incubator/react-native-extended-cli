@@ -15,7 +15,7 @@ fi
 $rnxRoot/util/logger.sh blockClosed "rnx lint"
 
 $rnxRoot/util/logger.sh blockOpened "rnx test unit"
-$rnxRoot/scripts/test.sh --unit
+$rnxRoot/scripts/test.sh --unit --skip-lint #no point in running lint here, we just ran it
 if [[ $? -ne 0 && $* != *--force* ]]; then
     echo "Tests failed: build terminating" 
     $rnxRoot/util/logger.sh buildStatus "Unit Tests Failed"
