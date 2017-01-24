@@ -3,8 +3,8 @@ set -e
 
 if [[ $* != *--skip-lint* ]]; then
   $rnxRoot/util/logger.sh blockOpened "Lint"
-  rnx lint $@
-  if [ $? -ne 0 ]; then
+  $rnxRoot/scripts/lint.sh
+  if [[ $? -ne 0 && $* != *--force* ]]; then
       echo "Lint failed"
       $rnxRoot/util/logger.sh buildStatus "Lint Failed"
       exit 1
