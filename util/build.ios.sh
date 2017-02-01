@@ -13,6 +13,7 @@ set -e
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   scheme="${releaseScheme}"
   buildMode="${releaseScheme}"
+  export RCT_NO_LAUNCH_PACKAGER=true
 else
   buildMode="Debug"
 fi
