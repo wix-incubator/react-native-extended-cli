@@ -5,7 +5,7 @@ if [ "$1" != "android" ]; then
   buildMode="Debug"
   appName=$npm_package_config_appName
   packageName=$npm_package_config_packageName
-  appPath=./ios/DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app
+  appPath=./ios/Build/Products/${buildMode}-iphonesimulator/${appName}.app
 
   echo "Starting ${appName} in ${buildMode} mode"
   node "$rnxRoot/util/start-simulator.ios.js" $npm_package_config_iphoneModel
