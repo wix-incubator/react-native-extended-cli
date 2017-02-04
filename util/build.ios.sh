@@ -32,7 +32,7 @@ $rnxRoot/util/logger.sh blockClosed "XCode Build"
 # make sure that the bundle was created successfully
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   if [ ! -f ${buildPath}/main.jsbundle ]; then
-    echo "jsbundle was not created!" > /dev/stderr
+    echo "error: main.jsbundle was not created in ${buildPath}/main.jsbundle" > /dev/stderr
     exit 4
   fi
 fi
