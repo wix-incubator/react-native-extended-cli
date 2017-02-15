@@ -19,14 +19,14 @@ else
 fi
 
 # set and clean build path
-buildPath="./Build/Products/${scheme}-iphonesimulator/${appName}.app"
+buildPath="./DerivedData/${appName}/Build/Products/${scheme}-iphonesimulator/${appName}.app"
 cd ios
 
 # build app
 $rnxRoot/util/logger.sh blockOpened "XCode Build"
 echo Building ${appName} in with scheme: ${scheme}...
 #xcodebuild -scheme ${scheme} clean
-xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}" -derivedDataPath "./Build/Products/"
+xcodebuild -scheme ${scheme} build -destination "platform=iOS Simulator,name=${model}"
 $rnxRoot/util/logger.sh blockClosed "XCode Build"
 
 # make sure that the bundle was created successfully
