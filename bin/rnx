@@ -1,7 +1,8 @@
 #!/bin/bash -e
 script=$1
 
-rnxRoot=`pwd -P`/${BASH_SOURCE[0]%/*}/../react-native-extended-cli
+rnxRoot=`pwd -P`/node_modules/react-native-extended-cli
+echo "rnx root: ${rnxRoot}"
 
 if [ ! -d "$rnxRoot" ]; then
     rnxRoot=${BASH_SOURCE[0]%/*}/../lib/node_modules/react-native-extended-cli
