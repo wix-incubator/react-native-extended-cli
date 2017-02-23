@@ -21,9 +21,9 @@ hasbin('jq', result => {
   }
 });
 
-hasbin('yarn', result => {
-  if (!result) {
-    logMessage('yarn', 'npm');
-    process.exit(1);
-  }
-});
+// hasbin('yarn', result => {
+//   if (!result) {
+//     logMessage('yarn', 'npm');
+//     process.exit(1);
+//   }
+// });
