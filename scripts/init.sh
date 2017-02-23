@@ -22,9 +22,13 @@ jq -r '.version="1.0.0"
     | .scripts.fakeserver=":"
     | .babel.env.specs.presets=["es2015", "react", "stage-0"]
     | .babel.env.specs.retainLines="true"
-    | .config.packageName="com.org.'$projectName'"
-    | .config.appName="'$projectName'"
-    | .config.iphoneModel="iPhone 6s" ' package.json > tmp.json && mv tmp.json package.json
+    | .config.appName="'${projectName}'"
+    | .config.iphoneModel="iPhone 7"
+    | .config.packageName="com.org.'${projectName}'"
+    | .detox.session.server="ws://localhost:8099"
+    | .detox.session.sessionId="'${projectName}'"
+    | .detox."ios-simulator".app="ios/DerivedData/'${projectName}''/Build/Products/Debug-iphonesimulator/'${projectName}'.app"
+    | .detox."ios-simulator".device="iPhone 7, iOS 10.1" ' package.json > tmp.json && mv tmp.json package.json
 
 yarn add --dev \
   react-native-extended-cli \

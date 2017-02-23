@@ -12,16 +12,10 @@ else
   osascript $rnxRoot/util/set_hardware_keyboard.applescript 0
 fi
 
-#todo deprecate jasmine/appium support eventually
-if [ -f "./test/e2e/support/jasmine-runner.js" ]; then
-  $rnxRoot/util/killProcess.sh appium
-  BABEL_ENV=specs specFilterString=./test/e2e/*.e2e.spec.js node ./test/e2e/support/jasmine-runner.js $@
-else
-  echo "Running Detox tests..."
-  $rnxRoot/util/killProcess.sh detox-server
-  ./node_modules/.bin/detox-server &
-  BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
-fi
+echo "Running Detox tests..."
+$rnxRoot/util/killProcess.sh detox-server
+./node_modules/.bin/detox-server &
+BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
 
 exitCode=$?
 set -e
@@ -29,7 +23,6 @@ $rnxRoot/util/logger.sh blockClosed E2E
 
 if [ "${IS_BUILD_AGENT}" == true ]; then
   $rnxRoot/util/killProcess.sh ./node_modules/react-native/packager/launchPackager.command
-  $rnxRoot/util/killProcess.sh "appium"
   $rnxRoot/util/killProcess.sh "Simulator"
   $rnxRoot/util/killProcess.sh "instruments -t"
   $rnxRoot/util/killProcess.sh "CoreSimulator"
