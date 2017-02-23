@@ -26,7 +26,7 @@ jq -r '.version="1.0.0"
     | .config.appName="'$projectName'"
     | .config.iphoneModel="iPhone 6s" ' package.json > tmp.json && mv tmp.json package.json
 
-npm install --save-dev \
+yarn add --dev \
   react-native-extended-cli \
   enzyme proxyquire \
   react-dom \
