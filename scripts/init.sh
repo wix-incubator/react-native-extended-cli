@@ -11,7 +11,7 @@ rninit init $projectName --source react-native@$rnVersion
 
 cd $projectName
 
-cp -r $rnxRoot/template/ ./ 
+cp -r $rnxRoot/template/ ./
 
 jq -r '.version="1.0.0"
     | .main="src/module.js"
@@ -40,4 +40,4 @@ yarn add --dev \
   eslint-plugin-react-native \
   react-native-mock
 
-echo Please enter XCode and change your package name to com.org.$projectName (or just change packageName in package.json)
+echo "Please enter XCode and change your package name to com.org.$projectName (or just change packageName in package.json)"
