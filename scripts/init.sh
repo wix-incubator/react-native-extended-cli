@@ -22,8 +22,8 @@ jq -r '.version="1.0.0"
     | .scripts.fakeserver=":"
     | .babel.env.specs.presets=["es2015", "react", "stage-0"]
     | .babel.env.specs.retainLines="true"
-    | .config.packageName="com.org.$projectName"
-    | .config.appName="$projectName"    
+    | .config.packageName="com.org.'$projectName'"
+    | .config.appName="'$projectName'"
     | .config.iphoneModel="iPhone 6s" ' package.json > tmp.json && mv tmp.json package.json
 
 npm install react-native-extended-cli enzyme proxyquire react-dom enzyme-drivers detox detox-server jasmine-reporters jasmine-spec-reporter eslint eslint-config-wix jasmine eslint-plugin-react-native react-native-mock --save-dev
