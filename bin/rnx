@@ -10,6 +10,7 @@ export rnxRoot
 export PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
 
 node ${rnxRoot}/bin/update-notifier.js
+node ${rnxRoot}/util/dependency-check.js
 
 if [ "$script" != "init" ]; then
   configVars="appName iphoneModel packageName"

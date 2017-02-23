@@ -16,7 +16,6 @@ if [ "$1" != "android" ]; then
   xcrun simctl install booted "$appPath"
   xcrun simctl launch booted $packageName
 
-
 fi
 
 if [ "$1" != "ios" ]; then
