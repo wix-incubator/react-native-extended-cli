@@ -4,6 +4,8 @@ This is an opinionated tool, catered toward a very specific set of conventions t
 
 ##Getting Started
 
+Dependencies: `jq``
+
 ```shell
 npm install -g react-native-extended-cli
 ```
@@ -25,13 +27,13 @@ list will be passed to the default `react-native-cli`.
 ```shell
 
 #run the app (currently only iOS) but don't rebuild, start the packager, or anything else. this is quick
-rnx app
+rnx app [ios|android]
 
 #build both android and ios
 rnx build
 
 #build just one of the platforms
-rnx build <platform>
+rnx build:<platform>
 
 #lint
 rnx lint
@@ -40,7 +42,7 @@ rnx lint
 rnx test [--unit|--e2e] [--skip-lint]
 
 #watch - lint and unit tests on all changes
-rnx watch
+rnx watch [--skip-lint]
 
 #open the ios project in xcode
 rnx xcode

@@ -2,7 +2,6 @@
 script=$1
 
 rnxRoot=`pwd -P`/node_modules/react-native-extended-cli
-echo "rnx root: ${rnxRoot}"
 
 if [ ! -d "$rnxRoot" ]; then
     rnxRoot=${BASH_SOURCE[0]%/*}/../lib/node_modules/react-native-extended-cli
@@ -10,14 +9,23 @@ fi
 export rnxRoot
 export PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
 
-
 node ${rnxRoot}/bin/update-notifier.js
 
 if [ "$script" != "init" ]; then
   configVars="appName iphoneModel packageName"
   for var in $configVars
   do
+      set +e
       val=$(jq -r .config.$var package.json)
+      if [ "$?" -ne "0" ]; then
+          echo Failed to parse package.json. Is this a valid React Native project?
+          echo If not, try:
+          echo
+          echo '>>' rnx init MyProject
+          echo
+          exit 1
+      fi
+      set -e
       if [ "$val" == "null" ]; then
           echo Missing config.$var in package.json. This could cause issues.
       else

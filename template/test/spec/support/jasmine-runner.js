@@ -2,7 +2,7 @@
 
 const Jasmine = require('jasmine');
 const jrunner = new Jasmine();
-const SpecReporter = require('jasmine-spec-reporter');
+const {SpecReporter} = require('jasmine-spec-reporter');
 
 const specReporter = new SpecReporter({
   displayStacktrace: 'summary',
