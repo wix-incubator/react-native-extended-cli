@@ -27,14 +27,15 @@ jq -r '.version="1.0.0"
     | .config.packageName="com.org.'${projectName}'"
     | .detox.session.server="ws://localhost:8099"
     | .detox.session.sessionId="'${projectName}'"
-    | .detox."ios-simulator".app="ios/DerivedData/'${projectName}''/Build/Products/Debug-iphonesimulator/'${projectName}'.app"
+    | .detox."ios-simulator".app="ios/DerivedData/'${projectName}'/Build/Products/Debug-iphonesimulator/'${projectName}'.app"
     | .detox."ios-simulator".device="iPhone 7, iOS 10.1" ' package.json > tmp.json && mv tmp.json package.json
 
-yarn add --dev \
+npm i --save-dev \
   react-native-extended-cli \
   enzyme proxyquire \
   react-dom \
   enzyme-drivers \
+  mocha \
   detox detox-server \
   jasmine-reporters \
   jasmine-spec-reporter \
