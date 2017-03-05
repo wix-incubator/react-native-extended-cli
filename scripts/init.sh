@@ -32,16 +32,16 @@ jq -r '.version="1.0.0"
 
 npm i --save-dev \
   react-native-extended-cli \
-  enzyme proxyquire \
+  proxyquire \
   react-dom \
-  enzyme-drivers \
-  mocha \
+  enzyme enzyme-drivers \
+  mocha jasmine jasmine-spec-reporter \
+  react-addons-test-utils \
   detox detox-server \
   jasmine-reporters \
   jasmine-spec-reporter \
   eslint \
   eslint-config-wix \
-  jasmine \
   eslint-plugin-react-native \
   react-native-mock
 
