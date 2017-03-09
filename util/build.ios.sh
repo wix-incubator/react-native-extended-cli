@@ -5,10 +5,6 @@ appName=$npm_package_config_appName
 scheme=$npm_package_config_appName
 releaseScheme=${npm_package_config_releaseScheme:=Release}
 
-set +e
-rm -rf ./artifacts; mkdir ./artifacts/ ; npm ls > ./artifacts/npm-list.txt
-set -e
-
 # update vars based on build mode
 if [ "${IS_BUILD_AGENT}" == true ] || [ "$1" == 'release' ]; then
   scheme="${releaseScheme}"
