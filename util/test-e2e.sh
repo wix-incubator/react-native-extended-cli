@@ -21,7 +21,8 @@ exitCode=$?
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-  cat `fbsimctl --state=booted diagnose | grep system_log | awk '{print $NF}'`
+  lastSimulator=`ls -Art /Users/builduser/Library/Logs/CoreSimulator/ |tail -n 1`
+  cat /Users/builduser/Library/Logs/CoreSimulator/${lastSimulator}/system.log
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
