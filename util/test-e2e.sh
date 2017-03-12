@@ -20,11 +20,9 @@ BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
 exitCode=$?
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
-  if [[ $exitCode != 0 ]]; then
-    $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-    cat `fbsimctl --state=booted diagnose | grep system_log | awk '{print $NF}'`
-    $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
-  fi
+  $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
+  cat `fbsimctl --state=booted diagnose | grep system_log | awk '{print $NF}'`
+  $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
 set -e
