@@ -1,6 +1,6 @@
 const detox = require('detox');
 const config = require('../../package.json').detox;
-const PROJECT_NAME = require('../../package.json').name;
+const PROJECT_NAME = require('../../package.json').config.appName;
 const RELEASE_MODE = process.argv.slice(2).indexOf('release') > -1;
 
 if (process.env.IS_BUILD_AGENT || RELEASE_MODE) { //eslint-disable-line

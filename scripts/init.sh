@@ -15,6 +15,7 @@ cp -r $rnxRoot/template/ ./
 
 jq -r '.version="1.0.0"
     | .main="src/module.js"
+    | .private=false
     | .scripts.build="rnx build"
     | .scripts.release="rnx release"
     | .scripts.lint="rnx lint"
