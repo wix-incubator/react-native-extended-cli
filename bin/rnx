@@ -17,7 +17,7 @@ if [ "$script" != "init" ]; then
   for var in $configVars
   do
       set +e
-      val=$(jq -r .config.$var package.json)
+      val=$(jq -r ".config.$var + .rnx.$var" package.json)
       if [ "$?" -ne "0" ]; then
           echo Failed to parse package.json. Is this a valid React Native project?
           echo If not, try:
@@ -28,7 +28,7 @@ if [ "$script" != "init" ]; then
       fi
       set -e
       if [ "$val" == "null" ]; then
-          echo Missing config.$var in package.json. This could cause issues.
+          echo Missing rnx.$var in package.json. This could cause issues.
       else
           export npm_package_config_$var="$val"
       fi
