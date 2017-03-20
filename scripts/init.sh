@@ -44,6 +44,8 @@ npm i --save-dev \
   eslint \
   eslint-config-wix \
   eslint-plugin-react-native \
-  react-native-mock
+  react-native-mock \
+  react-native-navigation
 
 echo "Please enter XCode and change your package name to com.org.$projectName (or just change packageName in package.json)"
+echo "You also need to set up React Native Navigation on your own. Sorry."
