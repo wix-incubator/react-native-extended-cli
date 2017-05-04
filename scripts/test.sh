@@ -12,7 +12,7 @@ if [[ $* != *--skip-lint* ]]; then
   $rnxRoot/util/logger.sh blockClosed "Lint"
 fi
 
-if [ "$1" != "--e2e" ]; then
+if [[ $* != *--e2e* ]]; then
   $rnxRoot/util/logger.sh blockOpened "Unit Tests"
   $rnxRoot/util/test-unit.sh $@
   if [ $? -ne 0 ]; then
@@ -23,7 +23,7 @@ if [ "$1" != "--e2e" ]; then
   $rnxRoot/util/logger.sh blockClosed "Unit Tests"
 fi
 
-if [ "$1" != "--unit" ]; then
+if [[ $* != *--unit* ]]; then
   $rnxRoot/util/logger.sh blockOpened "E2E Tests"
   $rnxRoot/util/test-e2e.sh $@
   if [ $? -ne 0 ]; then
