@@ -37,7 +37,7 @@ exitCode=$?
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
   lastSimulator=`ls -Art /Users/builduser/Library/Logs/CoreSimulator/ |tail -n 1`
-  cat /Users/builduser/Library/Logs/CoreSimulator/${lastSimulator}/system.log
+  cat /Users/builduser/Library/Logs/CoreSimulator/${lastSimulator}/system.log  |tail -n 2000
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
