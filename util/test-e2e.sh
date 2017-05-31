@@ -24,7 +24,7 @@ echo "Running Detox tests..."
 
 detoxVersion=$(jq -r .devDependencies.detox package.json)
 if [[ ${detoxVersion:0:2} == *"5"* ]]; then
-  ./node_modules/.bin/detox test --configuration ${config}
+  ./node_modules/.bin/detox test --configuration ${config} $@
 else
   echo "Please upgrade to detox@5.x.x, support for other versions in rnx will be soon deprecated"
   $rnxRoot/util/killProcess.sh detox-server
