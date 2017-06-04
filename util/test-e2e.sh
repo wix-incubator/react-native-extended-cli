@@ -22,24 +22,21 @@ fi
 
 echo "Running Detox tests..."
 
-#TODO use this block once everyone is on detox 5
-#mochaFile="mocha.opts"
-#if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
-#  if [ -f ./test/e2e/mocha-ci.opts ]; then
-#    mochaFile="mocha-ci.opts"
-#  fi
-#fi
-#
-#./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile}
+mochaFile="mocha.opts"
+if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+  if [ -f ./test/e2e/mocha-ci.opts ]; then
+    mochaFile="mocha-ci.opts"
+  fi
+fi
 
 detoxVersion=$(jq -r .devDependencies.detox package.json)
 if [[ ${detoxVersion:0:2} == *"5"* ]]; then
-  ./node_modules/.bin/detox test --configuration ${config}
+  ./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile}
 else
   echo "Please upgrade to detox@5.x.x, support for other versions in rnx will be soon deprecated"
   $rnxRoot/util/killProcess.sh detox-server
   ./node_modules/.bin/detox-server &
-  BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/mocha.opts $@
+  BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/${mochaFile} $@
 fi
 
 exitCode=$?
