@@ -28,7 +28,7 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   fi
 fi
 
-./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile} $@
+./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile}
 
 
 exitCode=$?
