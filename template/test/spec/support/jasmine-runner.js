@@ -5,14 +5,23 @@ const jrunner = new Jasmine();
 const {SpecReporter} = require('jasmine-spec-reporter');
 
 const specReporter = new SpecReporter({
-  displayStacktrace: 'summary',
-  displayFailuresSummary: true,
-  displayPendingSummary: true,
-  displaySuccessfulSpec: false,
-  displayFailedSpec: false,
-  displayPendingSpec: true,
-  displaySpecDuration: true,
-  displaySuiteNumber: false,
+  summary: {
+    displaySuccessful: false,
+    displayStacktrace: false,
+
+    displayFailed: true,
+    displayPending: true,
+    displayDuration: true,
+    displayErrorMessages: true,
+  },
+  spec: {
+    displaySuccessful: false,
+    displayPending: false,
+
+    displayFailed: true,
+    displayStacktrace: true,
+    displayErrorMessages: true,
+  },
   colors: {
     success: 'green',
     failure: 'red',

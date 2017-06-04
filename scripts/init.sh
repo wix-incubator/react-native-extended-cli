@@ -44,7 +44,6 @@ yarn add -D \
   react-addons-test-utils \
   detox detox-server \
   jasmine-reporters \
-  jasmine-spec-reporter \
   eslint \
   eslint-config-wix \
   eslint-plugin-react-native \
