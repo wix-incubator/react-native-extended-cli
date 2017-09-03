@@ -5,23 +5,6 @@ if [ ! -f ./test/mocks/configuration-facade-mock.private.js ]; then
 fi
 
 $rnxRoot/util/logger.sh blockOpened "rnx build"
-$rnxRoot/util/logger.sh blockOpened "rnx lint"
-$rnxRoot/scripts/lint.sh
-if [[ $? -ne 0 && $* != *--force* ]]; then
-    echo "Lint failed: build terminating"
-    $rnxRoot/util/logger.sh buildStatus "Lint Failed"
-    exit 3
-fi
-$rnxRoot/util/logger.sh blockClosed "rnx lint"
-
-$rnxRoot/util/logger.sh blockOpened "rnx test unit"
-$rnxRoot/scripts/test.sh --unit --skip-lint #no point in running lint here, we just ran it
-if [[ $? -ne 0 && $* != *--force* ]]; then
-    echo "Tests failed: build terminating" 
-    $rnxRoot/util/logger.sh buildStatus "Unit Tests Failed"
-    exit 4
-fi
-$rnxRoot/util/logger.sh blockClosed "rnx test unit"
 
 if [[ $* != *--skip-ios* ]]; then
     $rnxRoot/util/logger.sh blockOpened "iOS Build"
