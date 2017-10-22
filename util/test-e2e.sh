@@ -42,9 +42,18 @@ fi
 exitCode=$?
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+  lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |tail -n 1`
+
+  $rnxRoot/util/logger.sh blockOpened "Detox Error Logs"
+  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.err |tail -n 2000
+  $rnxRoot/util/logger.sh blockClosed "Detox Error Logs"
+
+  $rnxRoot/util/logger.sh blockOpened "Detox Logs"
+  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.out |tail -n 2000
+  $rnxRoot/util/logger.sh blockClosed "Detox Logs"
+
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-  lastSimulator=`ls -Art /Users/builduser/Library/Logs/CoreSimulator/ |tail -n 1`
-  cat /Users/builduser/Library/Logs/CoreSimulator/${lastSimulator}/system.log  |tail -n 2000
+  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log  |tail -n 2000
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
