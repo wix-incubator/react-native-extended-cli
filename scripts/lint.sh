@@ -2,5 +2,5 @@
 set +e
 
 echo Linting...
-echo 
-eslint src test
+echo
+eslint src test --cache
