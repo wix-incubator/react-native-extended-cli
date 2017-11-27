@@ -1,5 +1,19 @@
 #!/bin/bash -e
 
+if [[ $* == *--help* ]]; then
+    echo "
+    rnx build --> help 
+    ##########################
+    # Builds native apps as well as runs lint and unit tests first
+    # Options: 
+    #  --force          --> don't stop for failures
+    #  --skip-ios       --> build only android, same as $> rnx build:android
+    #  --skip-android   --> build only ios, same as $> rnx build:ios
+    #########################
+"
+    exit 0
+fi
+
 if [ ! -f ./test/mocks/configuration-facade-mock.private.js ]; then
   echo "export const ConfigurationFacadeMockPrivate = {};" > ./test/mocks/configuration-facade-mock.private.js
 fi

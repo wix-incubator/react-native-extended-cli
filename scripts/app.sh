@@ -1,5 +1,23 @@
 #!/bin/bash
 
+if [[ $* == *--help* ]]; then
+    echo "
+    rnx app --> help 
+    ##########################
+    # Runs native apps without building or testing anything first. Fastes way to get a
+    # simulator/emulator running with the demo app
+    # Options: 
+    #  android 
+    #  ios
+    #  
+    # Examples: 
+    # $> rnx app ios
+    # $> rnx app android
+    #########################
+"
+    exit 0
+fi
+
 if [ "$1" != "android" ]; then
 
   buildMode="Debug"

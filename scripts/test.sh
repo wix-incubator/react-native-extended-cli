@@ -1,6 +1,21 @@
 #!/bin/bash
 set -e
 
+if [[ $* == *--help* ]]; then
+    echo "
+    rnx test --> help 
+    ##########################
+    # Lint + Tests - Run before you push!!
+    # Options: 
+    #  --force        --> don't stop for failures
+    #  --unit         --> skip the e2e tests
+    #  --e2e          --> skip the unit tests
+    #  --skip-lint    --> Guess what it does!!
+    #########################
+"
+    exit 0
+fi
+
 if [[ $* != *--skip-lint* ]]; then
   $rnxRoot/util/logger.sh blockOpened "Lint"
   $rnxRoot/scripts/lint.sh
