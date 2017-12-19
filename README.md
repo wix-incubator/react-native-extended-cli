@@ -22,7 +22,8 @@ rnx init MyProject 0.29.1
 ##Common Commands
 
 For a complete list of commands, run `rnx` with no arguments. Anything you pass to `rnx` that isn't in that 
-list will be passed to the default `react-native-cli`. 
+list will be passed to the default `react-native-cli`.  Most commands can be passed a `--help` argument for 
+ more explanation.
 
 ```shell
 
