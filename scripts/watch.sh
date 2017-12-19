@@ -33,6 +33,4 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-echo $paths $*
-
 watch "$rnxRoot/scripts/test.sh --unit $args; if [ $? -eq 0 ]; then notify -m \"OK\" -t \"Watch\"; else notify -m \"ERROR\" -t \"Watch\"; fi" $paths
