@@ -30,13 +30,14 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
 fi
 
 detoxVersion=$(jq -r .devDependencies.detox package.json)
-if [[ ${detoxVersion:0:2} == *"5"* ]]; then
+if [[ ${detoxVersion:0:2} == *"6"* ]]; then
+  mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
+elif [[ ${detoxVersion:0:2} == *"5"* ]]; then
+  echo "Please upgrade to detox@6.x.x, support for other versions in rnx will be soon deprecated"
   ./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile}
 else
-  echo "Please upgrade to detox@5.x.x, support for other versions in rnx will be soon deprecated"
-  $rnxRoot/util/killProcess.sh detox-server
-  ./node_modules/.bin/detox-server &
-  BABEL_ENV=specs mocha test/e2e --opts ./test/e2e/${mochaFile} $@
+  echo "Please upgrade to detox@6.x.x, support for other versions is deprecated"
+  exit 1
 fi
 
 exitCode=$?
