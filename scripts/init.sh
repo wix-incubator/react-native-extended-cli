@@ -54,6 +54,7 @@ yarn add -D \
   eslint \
   eslint-config-wix \
   eslint-plugin-react-native \
+  eslint-plugin-import \
   react-native-mock \
   react-native-navigation
 
