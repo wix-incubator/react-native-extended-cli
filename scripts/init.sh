@@ -13,6 +13,7 @@ echo Copying project template from $rnxRoot/template/ to ./
 
 cd $projectName
 cp -r $rnxRoot/template/ ./
+mv .npmignore.template .npmignore
 
 echo Setting up package.json
 
