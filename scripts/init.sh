@@ -5,17 +5,21 @@ if [ "$rnVersion" == "" ]; then
     rnVersion="latest"
 fi
 
-echo Initialling React Native project $projectName with version: $rnVersion
+echo Initializing React Native project $projectName with version: $rnVersion
 
 rninit init $projectName --source react-native@$rnVersion
 
-cd $projectName
+echo Copying project template from $rnxRoot/template/ to ./
 
+cd $projectName
 cp -r $rnxRoot/template/ ./
+
+echo Setting up package.json
 
 jq -r '.version="1.0.0"
     | .main="src/module.js"
     | .private=false
+    | .scripts.start="rnx start"
     | .scripts.build="rnx build"
     | .scripts.release="rnx release"
     | .scripts.lint="rnx lint"
@@ -35,6 +39,8 @@ jq -r '.version="1.0.0"
     | .detox.configurations."ios.sim.release".name="iPhone 6s"
     ' package.json > tmp.json && mv tmp.json package.json
 
+echo Adding dev dependencies
+
 yarn add -D \
   react-native-extended-cli \
   proxyquire \
@@ -50,6 +56,6 @@ yarn add -D \
   react-native-mock \
   react-native-navigation
 
-echo "Please enter XCode and change your package name to com.org.$projectName (or just change packageName in package.json)"
+echo "Please enter XCode and change your package name to com.$org.$projectName (or just change packageName in package.json)"
 echo "If you want to publish this module to a private registry, add publishConfig.registry to your package.json as well."
 echo "You also need to set up React Native Navigation on your own. Sorry."
