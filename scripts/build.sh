@@ -20,6 +20,13 @@ fi
 
 $rnxRoot/util/logger.sh blockOpened "rnx build"
 
+# create shrinkwrap artifact
+if [ "${IS_BUILD_AGENT}" == true ]; then
+  mkdir ./artifacts
+  npm shrinkwrap
+  mv ./npm-shrinkwrap.json ./artifacts
+fi
+
 if [[ $* != *--skip-ios* ]]; then
     $rnxRoot/util/logger.sh blockOpened "iOS Build"
     $rnxRoot/util/build.ios.sh $1
