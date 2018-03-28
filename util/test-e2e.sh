@@ -1,4 +1,5 @@
 #!/bin/bash
+export BABEL_ENV=specs
 
 $rnxRoot/util/logger.sh blockOpened E2E
 set +e
