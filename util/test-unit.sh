@@ -13,7 +13,7 @@ if [[ ${hasJestConfig} == true ]]; then
         JEST_OPTS="$JEST_OPTS -i --coverage"
     }
     jest $JEST_OPTS
-     if [ $? -ne 0 ]; then 
+    if [ $? -ne 0 ]; then 
         exit 1
     fi
 fi
