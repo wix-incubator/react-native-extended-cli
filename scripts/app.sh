@@ -43,8 +43,11 @@ if [ "$1" != "android" ]; then
 fi
 
 if [ "$1" != "ios" ]; then
-  echo "Starting emulator..."
-  $ANDROID_HOME/tools/emulator -avd 'NEXUS_5X_API_23' &
+  echo "Searching for AVDs..."
+  avd=$($ANDROID_HOME/tools/emulator -list-avds | head -n 1)
+
+  echo "Starting emulator with AVD: $avd..."
+  $ANDROID_HOME/tools/emulator -avd $avd &
 
   WAIT_CMD="adb wait-for-device shell getprop init.svc.bootanim"
   until $WAIT_CMD | grep -m 1 stopped; do
@@ -53,8 +56,12 @@ if [ "$1" != "ios" ]; then
   done
   echo 'Emulator started...'
 
-  firstDevice=$(adb devices | tail -n +2 | awk '{print $1}')
-  adb -s $firstDevice install -r  android/app/build/outputs/apk/app-debug.apk
-  adb shell monkey -p com.mobile -c android.intent.category.LAUNCHER 1
+  if [[ "${USE_ENGINE}" == true ]]; then 
+    one-app-engine -a --no-packager --no-mock-server
+  else 
+    firstDevice=$(adb devices | tail -n +2 | awk '{print $1}')
+    adb -s $firstDevice install -r  android/app/build/outputs/apk/app-debug.apk
+    adb shell monkey -p com.mobile -c android.intent.category.LAUNCHER 1
+  fi
 
 fi
