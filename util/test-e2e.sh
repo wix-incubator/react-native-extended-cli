@@ -25,6 +25,7 @@ echo "Running Detox tests..."
 
 mochaFile="mocha.opts"
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+  rnx start &
   if [ -f ./test/e2e/mocha-ci.opts ]; then
     mochaFile="mocha-ci.opts"
   fi

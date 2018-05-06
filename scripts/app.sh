@@ -4,7 +4,7 @@ if [[ $* == *--help* ]]; then
     echo "
     rnx app --> help 
     ##########################
-    # Runs native apps without building or testing anything first. Fastes way to get a
+    # Runs native apps without building or testing anything first. Fastest way to get a
     # simulator/emulator running with the demo app
     # Options: 
     #  android 
@@ -19,20 +19,26 @@ if [[ $* == *--help* ]]; then
 fi
 
 if [ "$1" != "android" ]; then
-
-  buildMode="Debug"
-  appName=$npm_package_config_appName
-  packageName=$npm_package_config_packageName
-  appPath=./ios/DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app
-
-  echo "Starting ${appName} in ${buildMode} mode"
+  
   node "$rnxRoot/util/start-simulator.ios.js" $npm_package_config_iphoneModel
+  
+  if [[ "${USE_ENGINE}" == true ]]; then 
+    one-app-engine -i --no-packager --no-mock-server
+  else 
+    buildMode="Debug"
+    appName=$npm_package_config_appName
+    packageName=$npm_package_config_packageName
+    appPath=./ios/DerivedData/${appName}/Build/Products/${buildMode}-iphonesimulator/${appName}.app
 
-  # install app
-  CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "$appPath/Info.plist")
-  xcrun simctl uninstall booted ${CURRENT_BUNDLE_IDENTIFIER}
-  xcrun simctl install booted "$appPath"
-  xcrun simctl launch booted $packageName
+    echo "Starting ${appName} in ${buildMode} mode"
+    
+    # install app
+    CURRENT_BUNDLE_IDENTIFIER=$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" "$appPath/Info.plist")
+    xcrun simctl uninstall booted ${CURRENT_BUNDLE_IDENTIFIER}
+    xcrun simctl install booted "$appPath"
+    xcrun simctl launch booted $packageName
+
+  fi
 
 fi
 

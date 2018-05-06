@@ -56,6 +56,8 @@ scriptPath=${rnxRoot}/scripts/$script.sh
 
 shift
 if [ -f $scriptPath ]; then
+
+    export USE_ENGINE=$(jq -r '.rnx.useOneAppEngine' package.json)
     sh $scriptPath $@
 else
     echo "==================================================="
