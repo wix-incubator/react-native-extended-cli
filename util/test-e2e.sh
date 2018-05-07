@@ -24,7 +24,9 @@ fi
 echo "Running Detox tests..."
 
 mochaFile="mocha.opts"
-if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+if [ "${1}" == "release" ]; then
+  rnx start &
+elif [ "${IS_BUILD_AGENT}" == true ]; then
   rnx start &
   if [ -f ./test/e2e/mocha-ci.opts ]; then
     mochaFile="mocha-ci.opts"
@@ -47,7 +49,7 @@ fi
 
 exitCode=$?
 
-if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
+if [ "${IS_BUILD_AGENT}" == true ]; then
   lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |tail -n 1`
 
   $rnxRoot/util/logger.sh blockOpened "Detox Error Logs"
