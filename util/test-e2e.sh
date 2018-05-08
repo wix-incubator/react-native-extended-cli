@@ -53,15 +53,15 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
   lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |grep -|tail -n 1`
 
   $rnxRoot/util/logger.sh blockOpened "Detox Error Logs"
-  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.err |tail -n 2000
+  tail -2000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.err
   $rnxRoot/util/logger.sh blockClosed "Detox Error Logs"
 
   $rnxRoot/util/logger.sh blockOpened "Detox Logs"
-  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.out |tail -n 2000
+  tail -2000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.out
   $rnxRoot/util/logger.sh blockClosed "Detox Logs"
 
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-  cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log  |tail -n 2000
+  tail -2000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
