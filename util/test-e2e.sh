@@ -50,7 +50,7 @@ fi
 exitCode=$?
 
 if [ "${IS_BUILD_AGENT}" == true ]; then
-  lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |tail -n 1`
+  lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |grep -|tail -n 1`
 
   $rnxRoot/util/logger.sh blockOpened "Detox Error Logs"
   cat $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.err |tail -n 2000
