@@ -62,10 +62,10 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
 
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
   simulatorLogFile=$HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
-  echo "Adding ${simulatorLogFile} to `pwd`/artifacts"
-  mkdir ./artifacts
-  cp ${simulatorLogFile} ./artifacts/simulator-system.log
-  tail -1000 ${simulatorLogFile}
+  numOfLines=$(wc -l < "${simulatorLogFile}")
+  for ((i = numOfLines; i >= (numOfLines - 2000 || 0); i--)); do
+  	sed "${i}q;d" ${simulatorLogFile}
+  done
   rm ${simulatorLogFile}
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
