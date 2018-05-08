@@ -61,7 +61,10 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
   $rnxRoot/util/logger.sh blockClosed "Detox Logs"
 
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-  tail -2000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
+  simulatorLogFile=$HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
+  cp ${simulatorLogFile} ./artifacts
+  tail -2000 ${simulatorLogFile}
+  rm ${simulatorLogFile}
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
