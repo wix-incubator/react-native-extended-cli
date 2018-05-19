@@ -12,7 +12,7 @@ if [[ ${hasJestConfig} == true ]]; then
     [ -z "$TEAMCITY_VERSION" ] || {
         JEST_OPTS="$JEST_OPTS -i --coverage"
     }
-    jest $JEST_OPTS
+    CI=true jest $JEST_OPTS
     if [ $? -ne 0 ]; then 
         exit 1
     fi
