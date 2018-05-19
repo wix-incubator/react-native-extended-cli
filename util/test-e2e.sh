@@ -62,9 +62,12 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
 
   $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
   simulatorLogFile=$HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
-  numOfLines=$(wc -l < "${simulatorLogFile}")
+  filteredSimulatorLogFile=${simulatorLogFile}_filtered
+  cat ${simulatorLogFile}| grep -v "is implemented in both" > ${filteredSimulatorLogFile}
+
+  numOfLines=$(wc -l < "${filteredSimulatorLogFile}")
   for ((i = numOfLines; i >= (numOfLines - 2000 || 0); i--)); do
-  	sed "${i}q;d" ${simulatorLogFile}
+  	sed "${i}q;d" ${filteredSimulatorLogFile}
   done
   rm ${simulatorLogFile}
   $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
