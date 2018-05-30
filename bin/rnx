@@ -56,8 +56,11 @@ scriptPath=${rnxRoot}/scripts/$script.sh
 
 shift
 if [ -f $scriptPath ]; then
-
-    export USE_ENGINE=$(jq -r '.rnx.useOneAppEngine' package.json)
+    ENGINE_CFG=$(jq -r '.rnx.useOneAppEngine' package.json)
+    if [ "${ENGINE_CFG}" != "null" ]; then
+        export USE_ENGINE="true"
+        export ENGINE_START_ARGS=$(jq -r '.rnx.useOneAppEngine.withStartArgs' package.json)
+    fi
     sh $scriptPath $@
 else
     echo "==================================================="

@@ -14,12 +14,16 @@ adb reverse tcp:8081 tcp:8081 >/dev/null 2>&1
 adb reverse tcp:3000 tcp:3000 >/dev/null 2>&1
 
 if [[ "${USE_ENGINE}" == true ]]; then
-  mockMode="offline"
-  if [[ $* == *--prod* ]]; then 
+  if [[ $* == *--prod* ]]; then
     mockMode="quickLogin"
+  else
+    mockMode="offline"
+    engineArgs="${ENGINE_START_ARGS}"
   fi
 
-  one-app-engine --mock-mode $mockMode
+  set -x
+  one-app-engine --mock-mode $mockMode $engineArgs
+  set +x
 else 
   node node_modules/react-native/local-cli/cli.js start
 fi
