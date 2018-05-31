@@ -60,6 +60,7 @@ if [ -f $scriptPath ]; then
     if [ "${ENGINE_CFG}" != "null" ]; then
         export USE_ENGINE="true"
         export ENGINE_START_ARGS=$(jq -r '.rnx.useOneAppEngine.withStartArgs' package.json)
+        export ENGINE_ENABLE_DETOX=$(jq -r '.rnx.useOneAppEngine.withE2ESupport' package.json)
     fi
     sh $scriptPath $@
 else

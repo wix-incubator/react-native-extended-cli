@@ -34,7 +34,7 @@ elif [ "${IS_BUILD_AGENT}" == true ]; then
 fi
 
 detoxVersion=$(jq -r .devDependencies.detox package.json)
-if [[ "${USE_ENGINE}" == true ]]; then
+if [[ "${USE_ENGINE}" == true && "${ENGINE_ENABLE_DETOX}" != true ]]; then
   echo "E2E tests are not supported in the engine. for now..."
 elif [[ ${detoxVersion:0:2} == *"7"* ]]; then
   mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
