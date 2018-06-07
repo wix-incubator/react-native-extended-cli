@@ -3,4 +3,4 @@ set +e
 
 echo Linting...
 echo
-eslint src test --cache
+eslint src test demo --cache
