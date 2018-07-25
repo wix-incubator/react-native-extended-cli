@@ -38,7 +38,7 @@ if [[ "${USE_ENGINE}" == true && "${ENGINE_ENABLE_DETOX}" != true ]]; then
   echo "E2E tests are not supported in the engine. for now..."
 elif [[ ${detoxVersion:0:2} == *"7"* ]]; then
   echo "[]" > ~/Library/Detox/device.registry.state.lock
-  mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
+  mocha test/e2e --configuration  ${config} --opts  ./test/e2e/${mochaFile} --debug-synchronization 3000
 elif [[ ${detoxVersion:0:2} == *"6"* ]]; then
   echo "Please upgrade to detox@7.x.x, support for other versions in rnx will be soon deprecated"
   mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
