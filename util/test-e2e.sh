@@ -33,24 +33,11 @@ elif [ "${IS_BUILD_AGENT}" == true ]; then
   fi
 fi
 
-detoxVersion=$(jq -r .devDependencies.detox package.json)
 if [[ "${USE_ENGINE}" == true && "${ENGINE_ENABLE_DETOX}" != true ]]; then
   echo "E2E tests are not supported in the engine. for now..."
-elif [[ ${detoxVersion:0:2} == *"8"* ]]; then
-  echo "[]" > ~/Library/Detox/device.registry.state.lock
-  mocha test/e2e --configuration  ${config} --opts  ./test/e2e/${mochaFile}
-elif [[ ${detoxVersion:0:2} == *"7"* ]]; then
-  echo "[]" > ~/Library/Detox/device.registry.state.lock
-  mocha test/e2e --configuration  ${config} --opts  ./test/e2e/${mochaFile}
-elif [[ ${detoxVersion:0:2} == *"6"* ]]; then
-  echo "Please upgrade to detox@7.x.x, support for other versions in rnx will be soon deprecated"
-  mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
-elif [[ ${detoxVersion:0:2} == *"5"* ]]; then
-  echo "Please upgrade to detox@7.x.x, support for other versions in rnx will be soon deprecated"
-  ./node_modules/.bin/detox test --configuration ${config} --runner-config ${mochaFile}
 else
-  echo "Please upgrade to detox@7.x.x, support for other versions is deprecated"
-  exit 1
+  echo "[]" > ~/Library/Detox/device.registry.state.lock
+  mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
 fi
 
 exitCode=$?
