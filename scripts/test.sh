@@ -30,17 +30,7 @@ if [[ $* != *--skip-lint* ]]; then
 fi
 
 if [[ $* != *--skip-ts* ]]; then
-  if [ -f ./tsconfig.json ]; then
-    $rnxRoot/util/logger.sh blockOpened "Typescript"
-    echo Compiling Typescript...
-    tsc
-
-    if [[ $? -ne 0 && $* != *--force* ]]; then
-       $rnxRoot/util/logger.sh buildStatus "Typescript Compilation Failed"
-       exit 1
-    fi
-    $rnxRoot/util/logger.sh blockOpened "Typescript"
-  fi
+  $rnxRoot/util/typescript.sh $@
 fi
 
 if [[ $* != *--e2e* ]]; then
