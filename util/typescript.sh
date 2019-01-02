@@ -10,5 +10,5 @@ if [ -f ./tsconfig.json ]; then
        $rnxRoot/util/logger.sh buildStatus "Typescript Compilation Failed"
        exit 1
     fi
-    $rnxRoot/util/logger.sh blockOpened "Typescript"
+    $rnxRoot/util/logger.sh blockClosed "Typescript"
 fi
