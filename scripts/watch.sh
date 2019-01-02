@@ -2,12 +2,13 @@
 
 if [[ $* == *--help* ]]; then
     echo "
-    rnx watch --> help 
+    rnx watch --> help
     ##########################
     # Runs unit tests and lint every time a file changes
-    # Options: 
-    #  --skip-lint    --> a bunch faster  
-    #  --force        --> run the tests even if lint fails
+    # Options:
+    #  --skip-lint    --> a bunch faster
+    #  --skip-ts      --> skip typescript, if relevant
+    #  --force        --> run the tests even if lint/typescript fails
     #  --paths        --> override the default directories  to watch
     #
     # By default, this command watches for file changes in
