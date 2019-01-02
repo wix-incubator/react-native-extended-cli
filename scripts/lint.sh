@@ -4,3 +4,4 @@ set +e
 echo Linting...
 echo
 eslint src test demo --cache
+#tslint --project tsconfig.json

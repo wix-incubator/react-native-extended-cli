@@ -3,14 +3,16 @@ set -e
 
 if [[ $* == *--help* ]]; then
     echo "
-    rnx test --> help 
+    rnx test --> help
     ##########################
     # Lint + Tests - Run before you push!!
-    # Options: 
+    # Options:
     #  --force        --> don't stop for failures
     #  --unit         --> skip the e2e tests
     #  --e2e          --> skip the unit tests
-    #  --skip-lint    --> Guess what it does!!
+    #  --skip-lint    --> Skip lint step
+    #  --skip-ts      --> Skip typescript compilation
+    #  --skip-jest    --> Guess what it does!!
     #########################
 "
     exit 0
@@ -25,6 +27,20 @@ if [[ $* != *--skip-lint* ]]; then
       exit 1
   fi
   $rnxRoot/util/logger.sh blockClosed "Lint"
+fi
+
+if [[ $* != *--skip-ts* ]]; then
+  if [ -f ./tsconfig.json ]; then
+    $rnxRoot/util/logger.sh blockOpened "Typescript"
+    echo Compiling Typescript...
+    tsc
+
+    if [[ $? -ne 0 && $* != *--force* ]]; then
+       $rnxRoot/util/logger.sh buildStatus "Typescript Compilation Failed"
+       exit 1
+    fi
+    $rnxRoot/util/logger.sh blockOpened "Typescript"
+  fi
 fi
 
 if [[ $* != *--e2e* ]]; then
@@ -43,7 +59,7 @@ if [[ $* != *--unit* ]]; then
   $rnxRoot/util/test-e2e.sh $@
   if [ $? -ne 0 ]; then
     echo "E2E Tests failed"
-    $rnxRoot/util/logger.sh buildStatus "E2E Tests Failed"    
+    $rnxRoot/util/logger.sh buildStatus "E2E Tests Failed"
     exit 1
   fi
   $rnxRoot/util/logger.sh blockClosed "E2E Tests"

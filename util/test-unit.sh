@@ -1,9 +1,8 @@
 #!/bin/bash
 set +e
 
-hasJestConfig=$(jq -r 'has("jest")' package.json)
-
 if [[ $* != *--skip-jest* ]]; then
+  hasJestConfig=$(jq -r 'has("jest")' package.json)
   if [[ ${hasJestConfig} == true ]]; then
       JEST_OPTS=""
 
