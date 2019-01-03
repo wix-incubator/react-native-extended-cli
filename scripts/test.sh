@@ -20,7 +20,7 @@ fi
 
 if [[ $* != *--skip-lint* ]]; then
   $rnxRoot/util/logger.sh blockOpened "Lint"
-  $rnxRoot/scripts/lint.sh
+  $rnxRoot/scripts/lint.sh $@
   if [[ $? -ne 0 && $* != *--force* ]]; then
       echo "Lint failed"
       $rnxRoot/util/logger.sh buildStatus "Lint Failed"
