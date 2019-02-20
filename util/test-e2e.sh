@@ -52,18 +52,6 @@ if [ "${IS_BUILD_AGENT}" == true ]; then
   $rnxRoot/util/logger.sh blockOpened "Detox Logs"
   tail -1000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.out
   $rnxRoot/util/logger.sh blockClosed "Detox Logs"
-
-  $rnxRoot/util/logger.sh blockOpened "Simulator Diagnostic Logs"
-  simulatorLogFile=$HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/Library/Logs/system.log
-  filteredSimulatorLogFile=${simulatorLogFile}_filtered
-  cat ${simulatorLogFile}| grep -v "is implemented in both" > ${filteredSimulatorLogFile}
-
-  numOfLines=$(wc -l < "${filteredSimulatorLogFile}")
-  for ((i = numOfLines; i >= (numOfLines - 2000 || 0); i--)); do
-  	sed "${i}q;d" ${filteredSimulatorLogFile}
-  done
-  rm ${simulatorLogFile}
-  $rnxRoot/util/logger.sh blockClosed "Simulator Diagnostic Logs"
 fi
 
 set -e
