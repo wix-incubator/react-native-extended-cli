@@ -2,7 +2,7 @@
 Extended CLI with convenient scripts and utilities for developing React Native apps and modules.
 This is an opinionated tool, catered toward a very specific set of conventions that makes life easier for us. 
 
-##Getting Started
+## Getting Started
 
 Dependencies: `jq``
 
@@ -19,7 +19,7 @@ You can specify a specific version of React Native if you don't want to use the 
 rnx init MyProject 0.29.1
 ```
 
-##Common Commands
+## Common Commands
 
 For a complete list of commands, run `rnx` with no arguments. Anything you pass to `rnx` that isn't in that 
 list will be passed to the default `react-native-cli`.  Most commands can be passed a `--help` argument for 
