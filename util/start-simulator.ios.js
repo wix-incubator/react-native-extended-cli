@@ -11,7 +11,7 @@ if (!iphoneModel) {
 }
 
 const all = JSON.parse(cp.execSync(`xcrun simctl list -j devices`)).devices;
-const iOSDevices = _.flatten(_.filter(all, (i, key) => key.indexOf('SimRuntime.iOS') > 0));
+const iOSDevices = _.flatten(_.filter(all, (i, key) => key.indexOf('iOS') > 0));
 const device = _.find(iOSDevices, (d) => d.name === iphoneModel);
 if (!device) {
   throw new Error(`Can't find device with name ${iphoneModel}`);
