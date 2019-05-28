@@ -37,7 +37,7 @@ if [[ "${USE_ENGINE}" == true && "${ENGINE_ENABLE_DETOX}" != true ]]; then
   echo "E2E tests are not supported in the engine. for now..."
 else
   echo "[]" > ~/Library/Detox/device.registry.state.lock
-  mocha test/e2e --configuration  ${config} --opts ./test/e2e/${mochaFile}
+  detox test --configuration ${config} --runner-config test/e2e/${mochaFile} --artifacts-location artifacts --record-logs failing --take-screenshots failing
 fi
 
 exitCode=$?
