@@ -28,12 +28,8 @@ if [ -f ./test/spec/support/jasmine-runner.js ]; then
 
     $rnxRoot/util/logger.sh blockOpened "Jasmine Tests"
 
-    export BABEL_ENV=specs
-    if [ -f ./node_modules/ts-node/dist/index.js ]; then
-      ts-node ./test/spec/support/jasmine-runner.js
-    else
-      node ./test/spec/support/jasmine-runner.js
-    fi
+    echo "Jasmine unit tests are deprecated"
+    exit 1
 
     $rnxRoot/util/logger.sh blockOpened "Jasmine Tests"
 fi

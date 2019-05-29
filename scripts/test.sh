@@ -29,10 +29,6 @@ if [[ $* != *--skip-lint* ]]; then
   $rnxRoot/util/logger.sh blockClosed "Lint"
 fi
 
-if [[ $* != *--skip-ts* ]]; then
-  $rnxRoot/util/typescript.sh $@
-fi
-
 if [[ $* != *--e2e* ]]; then
   $rnxRoot/util/logger.sh blockOpened "Unit Tests"
   $rnxRoot/util/test-unit.sh $@

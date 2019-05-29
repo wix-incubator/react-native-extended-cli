@@ -20,8 +20,6 @@ fi
 
 $rnxRoot/util/logger.sh blockOpened "rnx build"
 
-$rnxRoot/util/typescript.sh $@
-
 if [[ $* != *--skip-ios* ]]; then
     $rnxRoot/util/logger.sh blockOpened "iOS Build"
     $rnxRoot/util/build.ios.sh $1
