@@ -1,9 +1,10 @@
 #!/bin/bash
 mltci release
+ARTIFACTS_FOLDER="./artifacts"
 
-mkdir ./artifacts
-npm shrinkwrap
-mv ./npm-shrinkwrap.json ./artifacts
+mkdir $ARTIFACTS_FOLDER
+cp ./package-lock.json $ARTIFACTS_FOLDER
+mv $ARTIFACTS_FOLDER ${teamcity.build.checkoutDir}
 
 version=$(jq -r '.version' package.json)
 $rnxRoot/util/logger.sh buildStatus "Version: ${version}; {build.status.text}"
