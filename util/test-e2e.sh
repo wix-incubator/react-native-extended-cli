@@ -33,25 +33,21 @@ elif [ "${IS_BUILD_AGENT}" == true ]; then
   fi
 fi
 
-if [[ "${USE_ENGINE}" == true && "${ENGINE_ENABLE_DETOX}" != true ]]; then
-  echo "E2E tests are not supported in the engine. for now..."
-else
+if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   echo "[]" > ~/Library/Detox/device.registry.state.lock
   detox test --configuration ${config} --runner-config test/e2e/${mochaFile} --artifacts-location "artifacts/" --record-logs failing --take-screenshots failing
+else
+  detox test --configuration ${config} --runner-config test/e2e/${mochaFile}
 fi
 
 exitCode=$?
 
 if [ "${IS_BUILD_AGENT}" == true ]; then
-  lastSimulator=`ls -Art $HOME/Library/Developer/CoreSimulator/Devices/ |grep -|tail -n 1`
-
-  $rnxRoot/util/logger.sh blockOpened "Detox Error Logs"
-  tail -1000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.err
-  $rnxRoot/util/logger.sh blockClosed "Detox Error Logs"
-
-  $rnxRoot/util/logger.sh blockOpened "Detox Logs"
-  tail -1000 $HOME/Library/Developer/CoreSimulator/Devices/${lastSimulator}/data/tmp/detox.last_launch_app_log.out
-  $rnxRoot/util/logger.sh blockClosed "Detox Logs"
+  # Move artifacts folder one level up so it will be collected
+  ARTIFACTS_FOLDER="./artifacts"
+  mkdir $ARTIFACTS_FOLDER
+  cp ./package-lock.json $ARTIFACTS_FOLDER
+  mv $ARTIFACTS_FOLDER ../
 fi
 
 set -e
