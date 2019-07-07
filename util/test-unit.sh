@@ -13,9 +13,9 @@ if [[ $* != *--skip-jest* ]]; then
       fi
 
       if [ -z "$TEAMCITY_VERSION" ]; then
-          JEST_OPTS="$JEST_OPTS --coverage"
           jest $JEST_OPTS
       else
+          JEST_OPTS="$JEST_OPTS -i --coverage"
           CI=true jest $JEST_OPTS
       fi
       if [ $? -ne 0 ]; then
