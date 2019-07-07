@@ -23,21 +23,24 @@ fi
 
 echo "Running Detox tests..."
 
-mochaFile="mocha.opts"
+runnerConfig=""
 if [ "${1}" == "release" ]; then
   rnx start &
+  if [ -f ./test/e2e/mocha.opts ]; then
+    runnerConfig="--runner-config test/e2e/mocha.opts"
+  fi
 elif [ "${IS_BUILD_AGENT}" == true ]; then
   rnx start &
   if [ -f ./test/e2e/mocha-ci.opts ]; then
-    mochaFile="mocha-ci.opts"
+    runnerConfig="--runner-config test/e2e/$mocha-ci.opts"
   fi
 fi
 
 if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   echo "[]" > ~/Library/Detox/device.registry.state.lock
-  detox test --configuration ${config} --runner-config test/e2e/${mochaFile} --artifacts-location "artifacts/" --record-logs failing --take-screenshots failing
+  detox test --configuration ${config} ${runnerConfig} --artifacts-location "artifacts/" --record-logs failing --take-screenshots failing
 else
-  detox test --configuration ${config} --runner-config test/e2e/${mochaFile}
+  detox test --configuration ${config} ${runnerConfig}
 fi
 
 exitCode=$?
