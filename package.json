@@ -7,8 +7,7 @@
     "test": ":",
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap",
-    "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\"",
-    "postpublish": "version=$(jq -r '.version' package.json); npm dist-tag add react-native-extended-cli@${version} ga"
+    "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\""
   },
   "repository": {
     "type": "git",
