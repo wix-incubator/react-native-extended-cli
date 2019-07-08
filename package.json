@@ -8,7 +8,9 @@
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap",
     "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\"",
-    "postpublish": "version=$(jq -r '.version' package.json); npm dist-tag add react-native-extended-cli@${version} ga"
+    "postpublish": "version=$(jq -r '.version' package.json); npm dist-tag add react-native-extended-cli@${version} ga",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,8 @@
     "node-notifier": "^4.5.0",
     "rninit": "^0.1.1",
     "update-notifier": "^2.1.0",
-    "watch": "^0.16.0"
+    "watch": "^0.16.0",
+    "snyk": "^1.192.3"
   },
   "bin": {
     "rnx": "bin/rnx"
@@ -39,5 +42,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "snyk": true
 }
