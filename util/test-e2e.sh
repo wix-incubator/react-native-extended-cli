@@ -24,11 +24,11 @@ fi
 echo "Running Detox tests..."
 
 runnerConfig=""
+if [ -f ./test/e2e/mocha.opts ]; then
+  runnerConfig="--runner-config test/e2e/mocha.opts"
+fi
 if [ "${1}" == "release" ]; then
   rnx start &
-  if [ -f ./test/e2e/mocha.opts ]; then
-    runnerConfig="--runner-config test/e2e/mocha.opts"
-  fi
 elif [ "${IS_BUILD_AGENT}" == true ]; then
   rnx start &
   if [ -f ./test/e2e/mocha-ci.opts ]; then
