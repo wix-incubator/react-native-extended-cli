@@ -32,7 +32,7 @@ if [ "${1}" == "release" ]; then
 elif [ "${IS_BUILD_AGENT}" == true ]; then
   rnx start &
   if [ -f ./test/e2e/mocha-ci.opts ]; then
-    runnerConfig="--runner-config test/e2e/mocha-ci.opts"
+    runnerConfig="--runner-config test/e2e/$mocha-ci.opts"
   fi
 fi
 
