@@ -12,10 +12,12 @@ if [[ $* != *--skip-jest* ]]; then
           JEST_OPTS="$JEST_OPTS --watch"
       fi
 
-      [ -z "$TEAMCITY_VERSION" ] || {
+      if [ -z "$TEAMCITY_VERSION" ]; then
+          jest $JEST_OPTS
+      else
           JEST_OPTS="$JEST_OPTS -i --coverage"
-      }
-      CI=true jest $JEST_OPTS
+          CI=true jest $JEST_OPTS
+      fi
       if [ $? -ne 0 ]; then
           exit 1
       fi

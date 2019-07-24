@@ -40,7 +40,7 @@ if [ "${IS_BUILD_AGENT}" == true ] || [ "${1}" == "release" ]; then
   echo "[]" > ~/Library/Detox/device.registry.state.lock
   detox test --configuration ${config} ${runnerConfig} --artifacts-location "artifacts/" --record-logs failing --take-screenshots failing
 else
-  detox test --configuration ${config} ${runnerConfig}
+  detox test --configuration ${config} ${runnerConfig} --loglevel warn
 fi
 
 exitCode=$?
