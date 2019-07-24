@@ -27,10 +27,7 @@ runnerConfig=""
 if [ -f ./test/e2e/mocha.opts ]; then
   runnerConfig="--runner-config test/e2e/mocha.opts"
 fi
-if [ "${1}" == "release" ]; then
-  rnx start &
-elif [ "${IS_BUILD_AGENT}" == true ]; then
-  rnx start &
+if [ "${IS_BUILD_AGENT}" == true ]; then
   if [ -f ./test/e2e/mocha-ci.opts ]; then
     runnerConfig="--runner-config test/e2e/mocha-ci.opts"
   fi
