@@ -9,16 +9,6 @@ Dependencies: `jq``
 ```shell
 npm install -g react-native-extended-cli
 ```
-
-## Generator
-
-`rnx` comes with a simple generator that creates new projects in the format that `rnx` commands expect them to be. 
-You can specify a specific version of React Native if you don't want to use the latest.  
-
-```
-rnx init MyProject 0.29.1
-```
-
 ##Common Commands
 
 For a complete list of commands, run `rnx` with no arguments. Anything you pass to `rnx` that isn't in that 

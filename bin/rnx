@@ -12,28 +12,22 @@ export PATH=$PATH:./node_modules/.bin:$rnxRoot/node_modules/.bin
 node ${rnxRoot}/bin/update-notifier.js
 node ${rnxRoot}/util/dependency-check.js
 
-if [ "$script" != "init" ]; then
-  configVars="appName iphoneModel packageName"
-  for var in $configVars
-  do
-      set +e
-      val=$(jq -r ".config.$var + .rnx.$var" package.json)
-      if [ "$?" -ne "0" ]; then
-          echo Failed to parse package.json. Is this a valid React Native project?
-          echo If not, try:
-          echo
-          echo '>>' rnx init MyProject
-          echo
-          exit 1
-      fi
-      set -e
-      if [ "$val" == "null" ]; then
-          echo Missing rnx.$var in package.json. This could cause issues.
-      else
-          export npm_package_config_$var="$val"
-      fi
-  done
-fi
+configVars="appName iphoneModel packageName"
+for var in $configVars
+do
+    set +e
+    val=$(jq -r ".config.$var + .rnx.$var" package.json)
+    if [ "$?" -ne "0" ]; then
+        echo Failed to parse package.json. Is this a valid React Native project?
+        exit 1
+    fi
+    set -e
+    if [ "$val" == "null" ]; then
+        echo Missing rnx.$var in package.json. This could cause issues.
+    else
+        export npm_package_config_$var="$val"
+    fi
+done
 
 
 if [ -z "$script" ]; then
@@ -42,10 +36,10 @@ if [ -z "$script" ]; then
     echo "You didn't specify a command, so I'll exit now."
     echo
     echo "Supported commands: "
-    echo    
-    for x in $(ls $rnxRoot/scripts) 
-    do 
-        echo "     *" ${x%.*} 
+    echo
+    for x in $(ls $rnxRoot/scripts)
+    do
+        echo "     *" ${x%.*}
     done
     echo "==================================================="
     exit
@@ -75,5 +69,5 @@ else
     else
         react-native $script $@
     fi
-    
+
 fi
