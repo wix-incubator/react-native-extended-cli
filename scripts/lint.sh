@@ -3,7 +3,7 @@ set +e
 
 echo Linting JS...
 echo
-eslint src test demo --cache
+eslint src test demo --ext ts,tsx,js,jsx --cache
 
 if [[ $? -ne 0 && $* != *--force* ]]; then
     exit 1
