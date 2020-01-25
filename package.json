@@ -20,18 +20,13 @@
   },
   "homepage": "https://github.com/wix/react-native-extended-cli#readme",
   "dependencies": {
-    "colors": "^1.0.3",
-    "hasbin": "^1.2.3",
     "lodash": "^4.14.0",
-    "node-notifier": "^4.5.0",
-    "update-notifier": "^2.1.0",
     "watch": "^0.16.0"
   },
   "bin": {
     "rnx": "bin/rnx"
   },
   "optionalDependencies": {
-    "flow-bin": "^0.23.0",
     "wnpm-ci": "^6.1.166",
     "wix-mobile-lifecycle-tools": "^2.0.0"
   },
