@@ -7,7 +7,9 @@
     "test": ":",
     "build": ":",
     "release": "wnpm-release -- --no-shrinkwrap",
-    "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\""
+    "postrelease": "echo \"##teamcity[buildStatus text='Version: `jq -r '.version' package.json`; {build.status.text}']\"",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,8 @@
   "homepage": "https://github.com/wix/react-native-extended-cli#readme",
   "dependencies": {
     "lodash": "^4.14.0",
-    "watch": "^0.16.0"
+    "watch": "^0.16.0",
+    "snyk": "^1.317.0"
   },
   "bin": {
     "rnx": "bin/rnx"
@@ -32,5 +35,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "snyk": true
 }
